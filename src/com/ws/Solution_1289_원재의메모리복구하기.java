@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 	2. 첫번째 1을 찾고 그 이후 바뀔 때마다 하나씩 체크
  */
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 

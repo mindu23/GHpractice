@@ -21,7 +21,6 @@ public class Main_1244_스위키켜고끄기 {
 			sInput[i] = sc.nextInt();
 		}
 		
-		
 		int studentCnt = sc.nextInt();
 		for(int i = 0; i < studentCnt; i++) {
 			int gender = sc.nextInt();
