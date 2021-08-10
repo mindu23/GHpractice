@@ -1,4 +1,4 @@
-package com.practice;
+package com.practice.순조부;
 
 import java.util.Arrays;
 

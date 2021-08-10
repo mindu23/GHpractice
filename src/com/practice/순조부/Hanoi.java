@@ -1,4 +1,4 @@
-package com.practice;
+package com.practice.순조부;
 
 public class Hanoi {
 
