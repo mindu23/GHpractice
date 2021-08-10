@@ -1,6 +1,5 @@
 package com.practice.순조부;
 
-import java.util.Arrays;
 
 public class SubSetTest {
 
@@ -9,7 +8,7 @@ public class SubSetTest {
 	static int N = 5, S = 21;
 	public static void main(String[] args) {
 		
-		input = new int[] {5,6,10,11,16};
+		input = new int[] {5,6,10,11,16}; 
 		isSelected = new boolean[N];
 		
 		generateSubSet(0);
@@ -25,7 +24,7 @@ public class SubSetTest {
 					sum += input[i];
 				}
 			}
-			if(sum > S) {
+			if(sum > S) { // 특정 조건
 				for(int j = 0; j < N; j++) {
 					if(isSelected[j]) System.out.print(input[j]+" ");
 				}
