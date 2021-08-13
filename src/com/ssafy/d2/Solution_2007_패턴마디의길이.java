@@ -17,8 +17,11 @@ public class Solution_2007_패턴마디의길이 {
 		
 		int T = Integer.parseInt(br.readLine());
 		for(int t = 1; t <= T; t++) {
-			char[] pattern = new char[30];
-			pattern = br.readLine().toCharArray();
+			String str = br.readLine();
+			
+			for(int i = 0; i < 10; i++) {
+				
+			}
 			
 			
 			
