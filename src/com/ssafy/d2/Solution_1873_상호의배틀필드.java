@@ -1,4 +1,7 @@
 package com.ssafy.d2;
+/**
+	같은 행동을 하는 것들을 묶어보자.
+ */
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

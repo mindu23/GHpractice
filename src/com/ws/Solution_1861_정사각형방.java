@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 public class Solution_1861_정사각형방 {
 
 	static int[][] map;
-	static int N, ans, roomNum;
+	static int N, maxMoveCnt, cnt, minRoomNo;
 	static int[] dr = {-1,1,0,0}, dc = {0,0,-1,1}; //상하좌우
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		System.setIn(new FileInputStream("src//inputFile//input_1861.txt"));
@@ -26,50 +26,43 @@ public class Solution_1861_정사각형방 {
 			}//setting
 			
 			/**
-				한칸씩 방문해서 4방탐색하며 하나 큰 방 찾기
-				방찾기가 끝나면 roomNum 방번호(최소 방)과 ans 방의 이동 횟수 출력해주기
+				한칸씩 방문해서 확인해보자
+				한칸한칸을 flat하게 보자. dfs 재귀를 사용해보자
+				움직임이 제일 큰 횟수를 고르고 그 횟수의 방 중 방 번호가 가장 작은 것 출력!
 			 */
-			ans = 1;
-			roomNum = -1;
+			maxMoveCnt = cnt = 1;
+			minRoomNo = -1;
 			for(int i = 0; i < N; i++) {
 				for(int j = 0; j < N; j++) {
 					visit(i, j);
+					
+					if(cnt > maxMoveCnt) {
+						maxMoveCnt = cnt;
+						minRoomNo = map[i][j];
+					}else if (cnt == maxMoveCnt && map[i][j] < minRoomNo){
+						minRoomNo = map[i][j];
+					}
+					cnt = 1;
 				}
 			}
 			
-			System.out.println("#"+t+" "+ roomNum+" "+ans);
+			System.out.println("#"+t+" "+ minRoomNo+" "+maxMoveCnt);
 			
 		}
 	}
 	
 	private static void visit(int i, int j) {
 		int nr, nc;
-		int dir = 0, cnt = 1;
 		int num = map[i][j];
-		while(dir < 4) {
+		for(int dir = 0; dir < 4; dir++) {
 			nr = i + dr[dir];
 			nc = j + dc[dir];
 			
-			if(nr < 0 || nr >= N || nc < 0 || nc >= N) {
-				dir++;
-				continue;
+			if(nr >= 0 && nr < N && nc >= 0 && nc < N && map[nr][nc] == num+1) {
+				cnt++;
+				visit(nr, nc);
 			}
-			
-			if(num+1 == map[nr][nc]) {//갖다면 자리 옮기자
-				cnt++; //옮긴 횟수
-				//System.out.println(cnt);
-				i = nr; //방 change
-				j = nc;
-				dir = 0; // 처음부터 다시 돌기
-			}else {
-				dir++;
-			}
-		}//탐색이 끝남
-		if(ans < cnt) {
-			ans = cnt;
-			roomNum = num;
 		}
-		
 	}
 
 }
