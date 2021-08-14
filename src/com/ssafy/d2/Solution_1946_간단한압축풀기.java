@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 
 public class Solution_1946_간단한압축풀기 {
 
-	static StringBuilder sb;
+	static StringBuffer sb;
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		System.setIn(new FileInputStream("src//inputFile//input_1946.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -18,8 +18,7 @@ public class Solution_1946_간단한압축풀기 {
 		int T = Integer.parseInt(br.readLine());
 		for(int t = 1; t <= T; t++) {
 			int N = Integer.parseInt(br.readLine());
-			sb = new StringBuilder();
-			sb.
+			sb = new StringBuffer();
 			for(int n = 0; n < N; n++) {
 				String[] str = br.readLine().split(" ");
 				char c = str[0].charAt(0);
@@ -27,8 +26,9 @@ public class Solution_1946_간단한압축풀기 {
 				
 				append(c, k);
 				
-				print();
 			}
+			System.out.println("#"+t);
+			print();
 			
 		}
 		
@@ -37,8 +37,9 @@ public class Solution_1946_간단한압축풀기 {
 	private static void print() {
 		for(int i = 0; i < sb.length(); i++) {
 			System.out.print(sb.charAt(i));
-			if(i != 0 && i%10 == 0) System.out.println();
+			if(i != 0 && i%10 == 9) System.out.println();
 		}
+		System.out.println();
 	}
 	
 	private static void append(char c, int k) {
