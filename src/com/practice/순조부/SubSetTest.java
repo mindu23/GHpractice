@@ -18,18 +18,22 @@ public class SubSetTest {
 
 		if(cnt == N) {
 			int sum = 0;
-//			System.out.print((isSelected[i]?input[i]:"X")+" ");
 			for(int i = 0; i < N; i++) {
-				if(isSelected[i]) {
-					sum += input[i];
-				}
+				
+				System.out.print((isSelected[i]?input[i]:"X")+" ");
 			}
-			if(sum > S) { // 특정 조건
-				for(int j = 0; j < N; j++) {
-					if(isSelected[j]) System.out.print(input[j]+" ");
-				}
-				System.out.println();
-			}
+			System.out.println();
+//			for(int i = 0; i < N; i++) {
+//				if(isSelected[i]) {
+//					sum += input[i];
+//				}
+//			}
+//			if(sum > S) { // 특정 조건
+//				for(int j = 0; j < N; j++) {
+//					if(isSelected[j]) System.out.print(input[j]+" ");
+//				}
+//				System.out.println();
+//			}
 			return;
 		}
 		

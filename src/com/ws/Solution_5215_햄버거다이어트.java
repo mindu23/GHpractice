@@ -43,6 +43,7 @@ public class Solution_5215_햄버거다이어트 {
 				K[i] = Integer.parseInt(str2[1]);
 			}
 			
+			//부분집합을 사용한 문제
 			sub(0);
 			System.out.println("#"+ t+ " "+ ans);
 		}
@@ -51,6 +52,7 @@ public class Solution_5215_햄버거다이어트 {
 	//부분집합
 	private static void sub(int cnt) {
 		
+		//부분집합으로 선택했든 안하든 cnt는 고려횟수를 말하는 것이므로 끝까지 고려했다면 cnt == N일때 끝난다.
 		if(cnt == N) {
 			if(Ksum < L) {
 				ans = Math.max(ans, Tsum);
@@ -58,13 +60,19 @@ public class Solution_5215_햄버거다이어트 {
 			return;
 		}
 		
+		//sel은 입력받은 재료를 선택했는지 안했는지를 알려준다.
 		sel[cnt] = true;
+		//Tsum은 맛에 대한 점수이다.
 		Tsum += T[cnt];
+		//Ksum은 칼로리에 대한 점수이다.
 		Ksum += K[cnt];
+		//부분집합 중 하나를 선택했으니 다음을 선택하겠다고 말한다.
 		sub(cnt+1);
+		//해당 재료를 선택하지않고 다음으로 넘어간다.
 		sel[cnt] = false;
 		Tsum -= T[cnt];
 		Ksum -= K[cnt];
+		//재료를 선택하지 않았더라도 고려횟수는 증가한다.
 		sub(cnt+1);
 	}
 
