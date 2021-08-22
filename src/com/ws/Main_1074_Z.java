@@ -7,40 +7,46 @@ import java.util.Scanner;
  */
 public class Main_1074_Z {
 
-	static int N, r, c, nub;
-	static int[][] arr;
+	static int ans;
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
-		N = sc.nextInt();
-		r = sc.nextInt();
-		c = sc.nextInt();
-		
-		int a = (int) Math.pow(2, N);
-		arr = new int[a][a];
-		
-		visit(0,0,N);
-
+		visit((int) Math.pow(2, sc.nextInt()), sc.nextInt(), sc.nextInt());
+		System.out.println(ans);
 		sc.close();
 	}
 	
-	private static void visit(int row, int col, int size) {
+	private static void visit(int n, int r, int c) {
 		
-		if(size == 2)
+		if(n == 2) {
+			int nr = r%n;
+			int nc = c%n;
+			if(nr == 0 && nc == 1) ans+=1;
+			else if(nr == 1 && nc == 0) ans+=2;
+			else if(nr == 1 && nc == 1) ans+=3;
+			return ;
+		}
 		
+		int newSize = n/2;
+		int loc = 0;
 		//1
-		if(row < size/2 && size )
-		
 		//2	
-			
+		if(r%n < newSize && c%n >= newSize) {
+			loc = 1;
+		}
 			
 		//3
+		else if(r%n >= newSize && c%n < newSize) {
+			loc = 2;
+		}
 			
 		//4
-		visit(row,col,size/2);
-		visit(row,col+size/2,size/2);
-		visit(row+size/2,col,size/2);
-		visit(row+size/2,col+size/2,size/2);
+		else if(r%n >= newSize && c%n >= newSize) {
+			loc = 3;
+		}
+		long cnt = newSize*newSize;
+		ans += loc * cnt;
+		visit(newSize, r, c);
 		
 	}
 
