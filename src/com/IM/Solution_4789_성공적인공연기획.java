@@ -20,7 +20,20 @@ public class Solution_4789_성공적인공연기획 {
 			for(int i = 1; i <= c.length;i++) {
 				input[i] = c[i-1]-'0';
 			}
+			
+			int ans = 0;
+			int clap = input[1]; //이미 박수를 치는 사람들
+			for(int i = 2; i <= c.length; i++) {
+				if(clap >= i-1) {
+					clap += input[i];
+				}else {
+					ans += i-1-clap;
+					clap = i-1;
+					clap += input[i];
+				}
+			}
 		
+			System.out.println("#"+t+" "+ ans);
 		}
 	}
 
