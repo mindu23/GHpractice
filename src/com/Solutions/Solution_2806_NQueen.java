@@ -1,4 +1,4 @@
-package Solutions;
+package com.Solutions;
 
 import java.util.Scanner;
 
