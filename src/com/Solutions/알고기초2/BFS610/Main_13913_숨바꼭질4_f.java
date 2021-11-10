@@ -1,12 +1,13 @@
 package com.Solutions.알고기초2.BFS610;
-
-import java.util.ArrayList;
+/**
+ * 실패
+ */
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Main_13913_숨바꼭질4 {
+public class Main_13913_숨바꼭질4_f {
 
 	static int N, K, ans, step;
 	static int[] map;
