@@ -24,7 +24,7 @@ public class Main_14226_이모티콘 {
 
 	private static void bfs(int s) {
 		Queue<int[]> q = new LinkedList<>();
-		boolean[][] visited = new boolean[2001][2001];
+		boolean[][] visited = new boolean[1002][1002]; //화면에 몇개, 클립보드에 몉개에 따라
 		q.offer(new int[] {1,0,0});//화면, 클립보드, 초
 		visited[1][0] = true;
 		
@@ -39,16 +39,19 @@ public class Main_14226_이모티콘 {
 				break;
 			}
 			
+			// 클립이 비어있지 않고 총 임티가 1000을 넘지않으면 그리고 한번도 방문 X -> 1
 			if(clip != 0 && screen+clip < 1001 && !visited[screen+clip][clip]) {
 				q.offer(new int[] {screen+clip, clip, sec+1});
 				visited[screen+clip][clip] = true;
 			}
 			
+			// 화면의 임티와 클립보드의 임티 개수가 같지 않고 방문하지 않았으면 -> 2
 			if(screen != clip && !visited[screen][screen]) {
 				q.offer(new int[] {screen, screen, sec+1});
 				visited[screen][screen] = true;
 			}
 			
+			// 화면에 2개 넘게 있을 때 하나 삭제해주기
 			if(screen > 2 && !visited[screen-1][clip]) {
 				q.offer(new int[] {screen-1, clip, sec+1});
 				visited[screen-1][clip] = true;
