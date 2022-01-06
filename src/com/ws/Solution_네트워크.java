@@ -36,7 +36,7 @@ public class Solution_네트워크 {
 				v[i] = con;
 				v[j] = con;
 				dfs(con, n, j, computers);
-			}
+			}//
 		}
 		
 	}
