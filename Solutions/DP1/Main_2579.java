@@ -19,12 +19,16 @@ public class Main_2579 {
         // 연속된 세개의 계단을 모두 밟을 수는 없다.
         // 마지막 도착 계단에 멈춰야한다.
 
+        // 밟은 수 있는 최댓값 구하기
         dp[1] = stair[1];
-        dp[2] = Math.max(dp[2], dp[1]+stair[2]);
-        dp[3] = Math.max(dp[1]+stair[3], stair[2]+stair[3]); // 한칸->두칸 // 두칸 -> 한칸 + dp[0]
+        if (N >= 2)
+            dp[2] = stair[2] + dp[1];
+
+        if (N >= 3)
+            dp[3] = Math.max(stair[2]+stair[3], dp[1] + stair[3]);
 
         for (int i = 4; i <= N; i++) {
-            dp[i] = Math.max(dp[i-2]+stair[i], stair[i-1]+stair[i]+dp[i-3]);
+            dp[i] = Math.max(dp[i-3] + stair[i-1] + stair[i], dp[i-2] + stair[i]);
         }
 
         System.out.println(dp[N]);
