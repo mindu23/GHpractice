@@ -5,43 +5,51 @@ import java.util.*;
 
 public class W13_12869_뮤탈리스크 {
 
-    static int N;
+    static int N, min;
     static int[] scv;
-    static int res;
+    static int[][][] dp;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
-        scv = new int[N];
+        scv = new int[3];
         StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
             scv[i] = Integer.parseInt(st.nextToken());
         }
 
-        // 모든 scv를 파괴하기 위한 공격 횟수의 최솟값.
-        // 체력이 제일 높은 순서대로 공격하기
-        // queue
+        // dp[i][j][k]는 체력이 i, j, k일 때, 모두 파괴하는 최소 공격 횟수
+        // 공격할 수 있는 횟수: 6가지
 
-        for (int i = 0; i < N; i++) {
-            int[] temp = Arrays.copyOf(scv, scv.length);
-            boolean[] v = new boolean[N];
-            for (int j = 0; j < attack.length; j++) {
-                v[j] = true;
-                solution(i, 0, temp, 0, v);
-            }
-        }
+        dp = new int[61][61][61];
+        min = Integer.MAX_VALUE;
+
+        solution(scv, 0);
+        System.out.println(min);
 
     }
 
-    static int[] attack = {9,3,1};
-    private static void solution(int n, int cnt, int[] temp, int die, boolean[] v) {
-        if (temp[n] == 0) return;
-        if (die == N) {
-            res = Math.min(res, cnt);
+    static int[][] attack = {{-9, -3, -1}, {-9, -1, -3}, {-3, -1, -9}, {-3, -9, -1}, {-1, -9, -3}, {-1, -3, -9}};
+    private static void solution(int[] scv, int cnt) {
+        int s0 = scv[0];
+        int s1 = scv[1];
+        int s2 = scv[2];
+
+        // 실행 횟수가 더 그다면 실행할 필요 없음
+        if (cnt >= min) return;
+
+        // 이미 방문했는데 기존 공격 횟수가 더 작을 경우 중단
+        if (dp[s0][s1][s2] != 0 && dp[s0][s1][s2] <= cnt) return;
+
+        // s0, s1, s2가 되기 까지 최소 공격 횟수
+        dp[s0][s1][s2] = cnt;
+
+        if (s0 == 0 && s1 ==0 && s2 ==0){
+            min = Math.min(min, cnt);
+            return ;
         }
 
-        for (int i = 0; i < N; i++) {
-            if (v[i]) continue;
-
+        for (int i = 0; i < attack.length; i++) {
+            solution(new int[]{Math.max(s0+attack[i][0], 0), Math.max(s1+attack[i][1],0), Math.max(s2+attack[i][2],0)}, cnt+1);
         }
     }
 }
