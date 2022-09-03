@@ -15,53 +15,50 @@ public class D21_주차요금계산 {
      * @return
      */
     private static int[] solution(int[] fees, String[] records) {
-        Map<Integer, String> map = new HashMap<>();
-        Map<Integer, Integer> carT = new HashMap<>();
+        // 현재 주차중인 차:시간(분)
+        Map<String, Integer> parkingCar = new HashMap<>();
+        // 주차된 차:누적 시간(분)
+        Map<String, Integer> timeCar = new HashMap<>();
         for (String record : records) {
             StringTokenizer st = new StringTokenizer(record);
             String time = st.nextToken();
-            Integer carN = Integer.parseInt(st.nextToken());
-            String command = st.nextToken();
-            if (command.equals("IN")){
-                map.put(carN, time);
-            }else { // OUT
-                int t = carTime(map.get(carN), time);
-                carT.put(carN, carT.getOrDefault(carN, 0) + t);
-                map.remove(carN);
+            String carN = st.nextToken();
+            if (parkingCar.containsKey(carN)){
+                // OUT
+                timeCar.put(carN, timeCar.getOrDefault(carN, 0) + getTime(time) - parkingCar.get(carN));
+                parkingCar.remove(carN);
+            }else {
+                // IN
+                parkingCar.put(carN, getTime(time));
             }
         }
 
-        for(Integer carN: map.keySet()){
-            int pay = carTime(map.get(carN), "23:59");
-            carT.put(carN, carT.getOrDefault(carN, 0) + pay);
-            map.remove(carN);
+        // 아직 안나간 차
+        for(String s: parkingCar.keySet()){
+            timeCar.put(s, timeCar.getOrDefault(s, 0) + getTime("23:59") - parkingCar.get(s));
         }
 
-        List<Integer> keySet = new ArrayList<>(carT.keySet());
-        Collections.sort(keySet);
+        List<String> keySet = new ArrayList<>(timeCar.keySet());
+        Collections.sort(keySet); // 차번호 오름차순
 
-        int[] answer = new int[carT.size()];
-        for(int i = 0; i < keySet.size(); i++){
-            int key = keySet.get(i);
-            answer[i] = carOut(carT.get(key), fees);
+        int[] answer = new int[keySet.size()];
+        for (int i = 0; i < keySet.size(); i++) {
+            int r = timeCar.get(keySet.get(i));
+            answer[i] = getPay(r, fees);
         }
+
         return answer;
     }
 
-    private static int carTime(String s, String time){
-        String[] inTime = s.split(":");
-        String[] outTime = time.split(":");
-        int h = Integer.parseInt(outTime[0]) - Integer.parseInt(inTime[0]);
-        int m = Integer.parseInt(outTime[1]) - Integer.parseInt(inTime[1]);
-        return h*60 + m;
+    private static int getPay(int r, int[] fees) {
+        if (r-fees[0] <= 0) return fees[1];
+        return fees[1] + (int)(Math.ceil((r-fees[0])/(double)fees[2]) * fees[3]);
     }
 
-    private static int carOut(int p, int[] fees){
-        int pay = 0;
-        double allM = p;
-        allM = allM - fees[0];
-        if (allM <= 0) return fees[1];
-        pay += fees[1] + Math.ceil(allM/fees[2])*fees[3];
-        return pay;
+    private static Integer getTime(String time) {
+        String[] t = time.split(":");
+        return Integer.parseInt(t[0])*60 + Integer.parseInt(t[1]);
     }
+
+
 }
