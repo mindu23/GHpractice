@@ -19,10 +19,10 @@ public class D1_최댓값과최솟값 {
         StringBuilder answer = new StringBuilder();
 
         StringTokenizer st = new StringTokenizer(s);
-        LinkedList<String> list = new LinkedList<>();
+        LinkedList<Integer> list = new LinkedList<>();
 
         while(st.hasMoreTokens()){
-            list.add(st.nextToken());
+            list.add(Integer.parseInt(st.nextToken()));
         }
 
         Collections.sort(list);
