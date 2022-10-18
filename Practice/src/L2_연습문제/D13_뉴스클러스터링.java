@@ -1,11 +1,8 @@
-package 연습문제;
+package L2_연습문제;
 
 import org.junit.jupiter.api.Assertions;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
 
 public class D13_뉴스클러스터링 {
 

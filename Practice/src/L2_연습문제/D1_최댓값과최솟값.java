@@ -1,4 +1,4 @@
-package 연습문제;
+package L2_연습문제;
 
 
 import org.junit.jupiter.api.Assertions;

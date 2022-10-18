@@ -1,10 +1,9 @@
-package 연습문제;
+package L2_연습문제;
 
 import org.junit.jupiter.api.Assertions;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class D11_캐시 {
 

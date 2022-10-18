@@ -1,6 +1,4 @@
-package 연습문제;
-
-import org.junit.jupiter.api.Assertions;
+package L2_연습문제;
 
 import java.util.Arrays;
 

@@ -1,9 +1,7 @@
-package 연습문제;
+package L2_연습문제;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 public class D2_피로도 {
 
